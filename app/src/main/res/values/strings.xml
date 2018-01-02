@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ButcherKnife</string>
+    <string name="date">dd/MM/yyyy</string>
+    <string name="name">Fecha: %s</string>
+
+</resources>
