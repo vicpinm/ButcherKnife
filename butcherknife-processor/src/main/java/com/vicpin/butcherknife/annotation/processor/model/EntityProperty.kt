@@ -10,7 +10,7 @@ import javax.lang.model.element.Element
 
 abstract class EntityProperty(annotatedField: Element) {
 
-    enum class Type { INT, LONG, FLOAT, DATE, STRING, OTHER }
+    enum class Type { INT, LONG, FLOAT, DATE, STRING, BOOL, OTHER }
 
     abstract val widgetClassName: String
     val name: String
@@ -22,7 +22,7 @@ abstract class EntityProperty(annotatedField: Element) {
 
     abstract fun getDataBindingBlock(propertyName: String): String
 
-    abstract fun getIsEmptyCondition(propertyName: String): String
+    abstract fun getIsEmptyCondition(propertyName: String): String?
 
     init {
         name = annotatedField.toString()
@@ -36,6 +36,7 @@ abstract class EntityProperty(annotatedField: Element) {
             "float" -> Type.FLOAT
             Date::class.java.name -> Type.DATE
             String::class.java.name -> Type.STRING
+            Boolean::class.java.name -> Type.BOOL
             else -> Type.OTHER
         }
 

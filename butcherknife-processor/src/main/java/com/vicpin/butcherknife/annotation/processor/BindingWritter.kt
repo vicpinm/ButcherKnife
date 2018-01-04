@@ -41,6 +41,7 @@ class BindingWritter(private val entity: Model.EntityModel) {
         newLine("import com.vicpin.butcherknife.Binding")
         newLine("import android.widget.TextView")
         newLine("import android.widget.ImageView")
+        newLine("import android.widget.CompoundButton")
         newLine("import java.text.SimpleDateFormat")
         newLine("import java.util.Date")
         newLine("import static com.vicpin.butcherknife.BindingUtils.*")
@@ -86,11 +87,16 @@ class BindingWritter(private val entity: Model.EntityModel) {
 
             newLine("if($propertyName != null) {" , level = 2)
 
-            newLine("${property.getIsEmptyCondition(propertyName)}", level = 3)
-            newLine("else {", level = 3)
-            newLine("$propertyName.setVisibility(View.VISIBLE)", level = 4)
-            newLine("${property.getDataBindingBlock(propertyName = propertyName)}", level = 4)
-            newLine("}", level = 3)
+            if(property.getIsEmptyCondition(propertyName) != null) {
+                newLine("${property.getIsEmptyCondition(propertyName)}", level = 3)
+                newLine("else {", level = 3)
+                newLine("$propertyName.setVisibility(View.VISIBLE)", level = 4)
+                newLine(property.getDataBindingBlock(propertyName = propertyName), level = 4)
+                newLine("}", level = 2)
+            }
+            else{
+                newLine(property.getDataBindingBlock(propertyName = propertyName), level = 4)
+            }
 
             newLine("}", level = 2)
         }

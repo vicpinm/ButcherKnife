@@ -31,4 +31,19 @@
         android:layout_width="match_parent"
         android:layout_height="100dp" />
 
+    <RadioButton
+        android:id="@+id/db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Switch
+        android:id="@+id/witch"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/cd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

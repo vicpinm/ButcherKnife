@@ -65,7 +65,11 @@ public class BindingUtils {
             creator.transform(new CircleTransform());
         }
         else if(cornerType != null && cornerRadius > 0){
-            creator.transform(new PicassoCornersTransformation(img.getResources().getDimensionPixelSize(cornerRadius), img.getResources().getDimensionPixelSize(cornerMargin), cornerType));
+            int cornerMarginPx = 0;
+            if(cornerMargin > 0) {
+                cornerMarginPx = img.getResources().getDimensionPixelSize(cornerMargin);
+            }
+            creator.transform(new PicassoCornersTransformation(img.getResources().getDimensionPixelSize(cornerRadius), cornerMarginPx, cornerType));
 
         }
         creator.into(img);

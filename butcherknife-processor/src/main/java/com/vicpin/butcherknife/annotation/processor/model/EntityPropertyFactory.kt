@@ -1,5 +1,6 @@
 package com.vicpin.butcherknife.annotation.processor.model
 
+import com.vicpin.butcherknife.annotation.BindBool
 import com.vicpin.butcherknife.annotation.BindDate
 import com.vicpin.butcherknife.annotation.BindImage
 import com.vicpin.butcherknife.annotation.BindText
@@ -21,6 +22,9 @@ class EntityPropertyFactory {
                 }
                 BindImage::class.java.name -> {
                     EntityImageProperty(annotatedField)
+                }
+                BindBool::class.java.name -> {
+                    EntityBoolProperty(annotatedField)
                 }
                 else -> {
                     EnvironmentUtil.logError("${annotation.name} is not a supported annotation type")

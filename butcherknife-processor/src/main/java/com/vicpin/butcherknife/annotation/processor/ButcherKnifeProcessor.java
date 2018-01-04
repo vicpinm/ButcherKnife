@@ -16,6 +16,7 @@ import javax.lang.model.util.Elements;
         "com.vicpin.butcherknife.annotation.BindDate",
         "com.vicpin.butcherknife.annotation.BindText",
         "com.vicpin.butcherknife.annotation.BindImage",
+        "com.vicpin.butcherknife.annotation.BindBool",
 })
 public class ButcherKnifeProcessor extends AbstractProcessor {
 

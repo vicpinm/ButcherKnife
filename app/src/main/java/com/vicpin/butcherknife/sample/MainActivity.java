@@ -14,10 +14,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Book b = new Book(new Date().getTime(),4432434,"http://www.worldbank.org/content/dam/photos/780x439/2016/sep-1/ssf2016AEM.jpg");
+        Book b = new Book(new Date().getTime(),4432434,"http://www.worldbank.org/content/dam/photos/780x439/2016/sep-1/ssf2016AEM.jpg", false, false, false);
 
 
          BookBinding.with(this).bind(b);
+
+
+
 
 
     }
