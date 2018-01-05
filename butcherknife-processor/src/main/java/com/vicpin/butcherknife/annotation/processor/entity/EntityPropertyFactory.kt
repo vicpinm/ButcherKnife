@@ -1,4 +1,4 @@
-package com.vicpin.butcherknife.annotation.processor.model
+package com.vicpin.butcherknife.annotation.processor.entity
 
 import com.vicpin.butcherknife.annotation.BindBool
 import com.vicpin.butcherknife.annotation.BindDate

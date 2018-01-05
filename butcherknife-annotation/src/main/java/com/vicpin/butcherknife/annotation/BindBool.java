@@ -14,4 +14,14 @@ public @interface BindBool {
      */
     int id();
 
+    /**
+     * Sync changes in widget with this field
+     */
+    boolean observeChanges() default false;
+
+    /**
+     * Update check when main view is clicked
+     */
+    boolean toggleOnClick() default false;
+
 }

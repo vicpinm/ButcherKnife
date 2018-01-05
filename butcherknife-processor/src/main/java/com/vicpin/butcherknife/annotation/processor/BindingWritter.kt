@@ -48,6 +48,7 @@ class BindingWritter(private val entity: Model.EntityModel) {
         newLine("import static com.vicpin.butcherknife.annotation.CornerType.*")
         newLine("import android.text.TextUtils")
         newLine("import android.view.View")
+        newLine("import com.vicpin.butcherknife.util.SimpleTextWatcher")
         newLine("import android.text.Html", newLine = true)
     }
 
@@ -64,24 +65,38 @@ class BindingWritter(private val entity: Model.EntityModel) {
     }
 
     private fun appendWithViewMethod() {
-        newLine("public static $className with(android.view.View view) {", level = 1)
-        newLine("$className binding = new $className()", level = 2)
+        newLine("public static $className with(View view) {", level = 1)
+        newLine("final $className binding = new $className()", level = 2)
         for (property in entity.properties) {
             val propertyName = entity.getPropertyName(property)
             newLine("binding.$propertyName = (${property.widgetClassName}) view.findViewById(${property.id})", level = 2)
         }
+        appendViewClickedMethod()
         newLine("return binding", level = 2)
         newLine("}", level = 1, newLine = true)
     }
 
+    fun appendViewClickedMethod() {
+        val toggleProperties = entity.properties.filter { it.toggleOnViewClick }
+        if(toggleProperties.isNotEmpty()) {
+            newLine("view.setOnClickListener(new View.OnClickListener() {", level = 2)
+            newLine("@Override public void onClick(View view) {", level = 3)
+            toggleProperties.forEach {
+                newLine("binding.${entity.getPropertyName(it)}.toggle()", level = 4)
+            }
+            newLine("}", level = 3)
+            newLine("})", level = 2)
+        }
+    }
+
     private fun appendWithActivityMethod() {
         newLine("public static $className with(android.app.Activity act) {", level = 1)
-        newLine("return with(act.getWindow().getDecorView())", level = 2)
+        newLine("return with(getChild(act.getWindow().getDecorView()))", level = 2)
         newLine("}", level = 1, newLine = true)
     }
 
     private fun appendBindMethod() {
-        newLine("@Override public void bind(${entity.name} entity) {", level = 1)
+        newLine("@Override public void bind(final ${entity.name} entity) {", level = 1)
         for (property in entity.properties) {
             val propertyName = entity.getPropertyName(property)
 
@@ -92,10 +107,14 @@ class BindingWritter(private val entity: Model.EntityModel) {
                 newLine("else {", level = 3)
                 newLine("$propertyName.setVisibility(View.VISIBLE)", level = 4)
                 newLine(property.getDataBindingBlock(propertyName = propertyName), level = 4)
-                newLine("}", level = 2)
+                newLine("}", level = 3)
             }
             else{
                 newLine(property.getDataBindingBlock(propertyName = propertyName), level = 4)
+            }
+
+            property.getDataObserverBlock(propertyName)?.let {
+                newLine(it, level = 3)
             }
 
             newLine("}", level = 2)

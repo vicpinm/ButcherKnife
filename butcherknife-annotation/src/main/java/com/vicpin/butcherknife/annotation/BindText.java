@@ -29,4 +29,9 @@ public @interface BindText {
      */
     boolean isHtml() default false;
 
+    /**
+     * Sync changes in widget with this field
+     */
+    boolean observeChanges() default false;
+
 }

@@ -1,6 +1,8 @@
 package com.vicpin.butcherknife.annotation.processor.model
 
 import com.vicpin.butcherknife.annotation.processor.EnvironmentUtil
+import com.vicpin.butcherknife.annotation.processor.entity.EntityProperty
+import com.vicpin.butcherknife.annotation.processor.entity.EntityPropertyFactory
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind

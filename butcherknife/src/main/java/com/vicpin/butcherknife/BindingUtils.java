@@ -1,6 +1,8 @@
 package com.vicpin.butcherknife;
 
 import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.RequestCreator;
@@ -74,6 +76,49 @@ public class BindingUtils {
         }
         creator.into(img);
     }
+
+    public static int parseInteger(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+
+    public static long parseLong(String text) {
+        try {
+            return Long.parseLong(text);
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+
+    public static float parseFloat(String text) {
+        try {
+            return Float.parseFloat(text);
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+
+    public static double parseDouble(String text) {
+        try {
+            return Double.parseDouble(text);
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+
+    public static View getChild(View v) {
+        if(v instanceof ViewGroup && ((ViewGroup) v).getChildAt(0) != null) {
+            return ((ViewGroup)v).getChildAt(0);
+        }
+        else{
+            return v;
+        }
+    }
+
+
 
 
 

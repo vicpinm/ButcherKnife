@@ -1,4 +1,4 @@
-package com.vicpin.butcherknife.annotation.processor.model
+package com.vicpin.butcherknife.annotation.processor.entity
 
 import com.vicpin.butcherknife.annotation.BindDate
 import javax.lang.model.element.Element
@@ -9,7 +9,7 @@ import javax.lang.model.element.Element
 
 class EntityDateProperty(annotatedField: Element) : EntityProperty(annotatedField) {
 
-    override val widgetClassName: String
+    override val widgetClassName = "TextView"
     override val id: Int
     override val visibilityIfEmpty: Int
 
@@ -17,23 +17,16 @@ class EntityDateProperty(annotatedField: Element) : EntityProperty(annotatedFiel
     val template : Int
 
     init {
-        widgetClassName = "TextView"
-        id = annotatedField.getAnnotation(BindDate::class.java).id
-        formatRes = annotatedField.getAnnotation(BindDate::class.java).format
-        template = annotatedField.getAnnotation(BindDate::class.java).template
-        visibilityIfEmpty = annotatedField.getAnnotation(BindDate::class.java).visibilityIfEmpty
+        val annotation = annotatedField.getAnnotation(BindDate::class.java)
+        id = annotation.id
+        formatRes = annotation.format
+        template = annotation.template
+        visibilityIfEmpty = annotation.visibilityIfEmpty
     }
 
     override fun getSupportedTypes(): List<Type> {
         return listOf(Type.LONG, Type.DATE)
     }
-
-    val getterMethod: String
-        get() = if (name.length > 1) {
-            "get${name.substring(0, 1).toUpperCase()}${name.substring(1, name.length)}()"
-        } else {
-            "get${name.substring(0, 1).toUpperCase()}()"
-        }
 
 
     override fun getDataBindingBlock(propertyName: String): String {
