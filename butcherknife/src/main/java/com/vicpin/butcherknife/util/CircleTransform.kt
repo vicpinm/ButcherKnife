@@ -1,4 +1,4 @@
-package events.symposium.app.util
+package com.vicpin.butcherknife.util
 
 import android.graphics.*
 import com.squareup.picasso.Transformation

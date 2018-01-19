@@ -7,15 +7,13 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.RequestCreator;
 import com.vicpin.butcherknife.annotation.CornerType;
+import com.vicpin.butcherknife.util.CircleTransform;
 import com.vicpin.butcherknife.util.PicassoCornersTransformation;
 import com.vicpin.butcherknife.util.PicassoManager;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import events.symposium.app.util.CircleTransform;
-
 
 
 public class BindingUtils {
