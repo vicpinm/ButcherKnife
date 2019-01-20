@@ -2,7 +2,7 @@
   <img width="50%" src ="/logo.png" />
 </p>
 
-**Lightweight binding engine based annotation processing. Bind your view model to your views throught annotations, with the help of annotation parameters with which you can format and with which the binding process.**
+**Lightweight binding engine based on annotation processing. Bind your view model to your views throught simple annotations  with arguments that let you format and customize the binding process.**
 
 ### Basic example
 
