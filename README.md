@@ -36,19 +36,68 @@ Let's take a look at each annotation:
 
 As you can see, with a few annotations, you get a lot of work done for you. And this is only a sample of the power of ButcherKnife.
 
-### Annotations list
-In this table you can see all types of annotations available and the arguments you can set to each of them. 
+## Available annotations
+Next you can see all types of annotations available and the arguments you can set to each of them. 
 
-#### @BindText
-**Allowed field types for this annotation: String, Int, Long, Float and Double**
-
+### @BindText
+* **Allowed field types for this annotation: String, Int, Long, Float and Double**
+* **Target view: TextView, EditText... (any View with a setText(string) method)**
 
 | Argument      | Type | Required  | Description          |
 | :------------- |:-----| :---------| :--------------------|
-| **id**           | Int  | Yes       | View id to be initialized with the value of the annotated field |
+| **id**           | Int  | Yes       | Target view. View id to be initialized with the value of the annotated field. |
 | **template**       | Int  | No        | String resource id to be used as template. This string resource should contain one placeholder like ```%s```or ```%d```. The value contained in the field annotated with ```@BindText``` will be placed in that placeholder.   |
-| **visibilityIfEmpty**       | Int  | No        | You can control the visibility of the view if you set set this argument in the annotation. For example, with ``` @BindText(id = ..., visibilityIfEmpty = View.GONE) ```, your view will be set as GONE if your field is null or empty. |
+| **visibilityIfEmpty**       | Int  | No        | You can control the visibility of the view if you set set this argument with this annotation. For example, with ``` @BindText(id = ..., visibilityIfEmpty = View.GONE) ```, your view will be set as GONE if your field is null or empty. |
 | **isHtml**           | Boolean  | No       | If your field contains html tags, you can parse them like you would do with ```Html.fromHtml(...)```. You have to set in your annotation ```isHtml = true``` if you need that behaviour. |
+| **observeChanges**           | Boolean  | No       | If your target view is an EditText or inherits from EditText, and you want to update your field annotated with @BindText when the content of your EditText changes, set this argument to true. Default false. |
+
+### @BindDate
+**Allowed field types for this annotation: Long and Date**
+* **Target view: TextView, EditText... (any View with a setText(string) method)**
+
+| Argument      | Type | Required  | Description          |
+| :------------- |:-----| :---------| :--------------------|
+| **id**           | Int  | Yes       | View id to be initialized with the value of the annotated field. |
+| **format**       | Int  | Yes        | String resource id to be used as date pattern. ButcherKnife uses ```DateFormat``` to convert your date to a String using the pattern you provide.  |
+| **template**       | Int  | No        | String resource id to be used as template. This string resource should contain one placeholder like ```%s```or ```%d```. The value contained in the field annotated with ```@BindText``` will be placed in that placeholder.   |
+| **visibilityIfEmpty**       | Int  | No        | You can control the visibility of the view if you set set this argument with this annotation. For example, with ``` @BindText(id = ..., visibilityIfEmpty = View.GONE) ```, your view will be set as GONE if your field is null or empty. |
+
+### @BindImage
+* **Allowed field types for this annotation: String**
+* **Target view: ImageView or any view that inherits from ImageView**
+
+| Argument      | Type | Required  | Description          |
+| :------------- |:-----| :---------| :--------------------|
+| **id**           | Int  | Yes       | View id to be initialized with the value of the annotated field. |
+| **placeholder**       | Int  | No        | Placeholder to show while Picasso is loading your image.  |
+| **cropped**       | Boolean  | No        | Whether your image will use scale type cropped or not (default true).  |
+| **isFile**       | Boolean  | No        | Set this attribute to true if you are loading your image from an imageFile (deafult false).  |
+| **isCircle**       | Boolean  | No        | Set this attribute to true if you want to transform your image with a circle shape.    |
+| **cornerRadius**       | Int  | No        | Dimension resource. If you want to round the corners of your ImageView, specify a dimension resource with the raidus, like ```cornerRadius = R.dimen.small_corner```   |
+| **cornerType**       | CornerType  | No        | If you set a cornerRadius, all corners will be rounded. If you want to specify the corners you want to round, set a corner type value, like ```cornerType = CornerType.TOP```  |
+| **visibilityIfEmpty**       | Int  | No        | You can control the visibility of the view if you set set this argument with this annotation. For example, with ``` @BindText(id = ..., visibilityIfEmpty = View.GONE) ```, your view will be set as GONE if your field is null or empty. |
+
+### @BindBool
+* **Allowed field types for this annotation: Boolean**
+* **Target view: CompoundButton or any view that inherits from CompoundButton (RadioButton, CheckBox...)**
+
+| Argument      | Type | Required  | Description          |
+| :------------- |:-----| :---------| :--------------------|
+| **id**           | Int  | Yes       | View id to be initialized with the value of the annotated field. |
+| **observeChanges**           | Boolean  | No       | If your want to listen changes in the check status of your target view, set this argument to true. Default false. |
 
 
+## Download 
+
+Grab via Gradle:
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+implementation "com.github.vicpinm:butcherknife:1.0.2"
+kapt "com.github.vicpinm:butcherknife-processor:1.0.2"
+
+```
 
